@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☁️</text></svg>"><title>Node Previewer</title>    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {margin: auto;color: #090;background:#222;padding-top: 13px; } textarea,.div,#editor,#output{width:80vw;max-width:80vw;}
+    textarea {height: 500px; color: #c9c9c9;padding: 6px 10px; background-color: #4a4a4a;border: none;border-radius: 4px;box-sizing: border-box;}
+    .div {margin: auto;} textarea:focus {outline: none;border: none;} .row {display:flex}
+    #output {background:#000;padding:1px 0;font-family:'Source Code Pro';white-space:break-spaces;position:relative;display:grid;grid-template-columns:auto;overflow-x: scroll;overflow-y: hidden;}
+    white,.white {color:#c0c0c0} red,.red {color:#800000} blue,.blue {color:#000080} green,.green {color:#008000} magenta,.magenta {color:#800080} yellow,.yellow {color:#808000} cyan,.cyan {color:#008080} 
+    bright {color:#0f0;} bg,.bg,pre{background:#002500;} l,a{color:#0F0;text-decoration: underline;} @keyframes blinker {0% {opacity:1} to {opacity:0}}
+    bl {animation-duration:1.4s;animation-iteration-count:infinite;animation-name:blinker;animation-timing-function:cubic-bezier(1,0,0,1)}
+    #editor {position:relative;height:500px;}
+    blockquote{margin:5px;background:#002500;padding:15px;color:#0f0;max-width:inherit;} h1{text-align:center;margin:10px;}
+    .bgwhite {background:#c0c0c0} .bgred {background:#800000} .bgblue {background:#000080} .bggreen {background:#008000} .bgmagenta {background:#800080} 
+    .bgyellow {background:#808000} .bgcyan {background:#008080}
+    .con{display: grid;grid-template-areas:"box1 box2 box3";grid-template-columns: auto auto auto;margin:5px auto;}
+    .conTwo{display: grid;grid-template-areas:"box1 box2";grid-template-columns: auto auto;margin:5px auto;}div.box1{grid-area:box1;}div.box2{grid-area:box2;}div.box3{grid-area:box3;}
+    th,td{border:1px #005800 solid;padding:3px} table{border-collapse:collapse;width:fit-content;margin-left: 5px;max-width:inherit;} tr:nth-child(even){background:#002500;color:#0f0}
+    .lis{white-space: collapse;margin: 5px} 
+    pre{width: fit-content;margin:5px;font-family:'Source Code Pro';white-space:break-spaces;max-width:inherit;} nb{height:13px;line-height:13px;display:inline-block} p{margin:0 0 5px 5px;max-width:inherit;}
+    @media only screen and (max-width:1000px) { 
+        .con,.conTwo,#output{display: block;}div.box1,div.box2,div.box3{border-bottom: 1px darkgreen solid;max-width:90vw;}p,.text{max-width:90vw;}.progress{max-width: 70vw}
+        body{padding-top:0px;}textarea,.div,#editor,#output{width:100vw;max-width:100vw;white-space:collapse;}
+    }
+</style>
+<script src="HTMLpreviewer.js"></script>
+</head>
+<body onload="getTextWidth()">
+<div class="div">
+<div id="output" readonly></div>
+<div>
+<div id="editor"></div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/combine/npm/ace-builds@1.43.5,npm/ace-builds@1.43.5/src-min-noconflict/ext-searchbox.js,npm/ace-builds@1.43.5/src-min-noconflict/theme-twilight.js"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/twilight");
+    editor.setOptions({"selectionStyle": "line","enableAutoIndent": false,"showLineNumbers": false,"hScrollBarAlwaysVisible": false,"vScrollBarAlwaysVisible": false,"highlightGutterLine": false,"animatedScroll": false,"showPrintMargin": false,"printMargin": false,"fadeFoldWidgets": false,"showFoldWidgets": false,"displayIndentGuides": false,"highlightIndentGuides": false,"showGutter": false,"fontSize": "14px","useTextareaForIME": true,"useSoftTabs": false,"scrollSpeed": 2,"wrap": "off","indentedSoftWrap": false,"foldStyle": "markbegin","enableMultiselect": true,"enableBlockSelect": true})
+    document.addEventListener("keyup", formatList);
+</script>
+</body>
+</html>
