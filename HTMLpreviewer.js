@@ -1,9 +1,8 @@
-inputField = document.getElementById("input");
 textWidth=7.8;
 function formatList() {
   res = [];
   try {value = editor.getValue();}
-  catch(err) {value = inputField.value;}
+  catch(err) {value = document.getElementById("input").value;}
   let arr = value.split(/\r?\n/);
   table = []; tableTime = false;
   quote = []; quoteTime = false;
