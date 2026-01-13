@@ -4,7 +4,7 @@
     body {margin: auto;color: #090;background:#222;padding-top: 13px; } textarea,.div,#editor,#output{width:80vw;max-width:80vw;}
     textarea {height: 500px; color: #c9c9c9;padding: 6px 10px; background-color: #4a4a4a;border: none;border-radius: 4px;box-sizing: border-box;}
     .div {margin: auto;} textarea:focus {outline: none;border: none;} .row {display:flex}
-    #output {background:#000;padding:1px 0;font-family:'Source Code Pro';white-space:break-spaces;position:relative;display:grid;grid-template-columns:auto;overflow-x: scroll;overflow-y: hidden;}
+    #output {background:#000;padding:1px 0;font-size:14px;font-family:'Source Code Pro';white-space:break-spaces;position:relative;display:grid;grid-template-columns:auto;overflow-x: scroll;overflow-y: hidden;}
     white,.white {color:#c0c0c0} red,.red {color:#800000} blue,.blue {color:#000080} green,.green {color:#008000} magenta,.magenta {color:#800080} yellow,.yellow {color:#808000} cyan,.cyan {color:#008080} 
     bright {color:#0f0;} bg,.bg,pre{background:#002500;} l,a{color:#0F0;text-decoration: underline;} @keyframes blinker {0% {opacity:1} to {opacity:0}}
     bl {animation-duration:1.4s;animation-iteration-count:infinite;animation-name:blinker;animation-timing-function:cubic-bezier(1,0,0,1)}
@@ -33,9 +33,10 @@
 </div>
 <script src="https://cdn.jsdelivr.net/combine/npm/ace-builds@1.43.5,npm/ace-builds@1.43.5/src-min-noconflict/ext-searchbox.js,npm/ace-builds@1.43.5/src-min-noconflict/theme-twilight.js"></script>
 <script>
+  try{
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/twilight");
-    editor.setOptions({"selectionStyle": "line","enableAutoIndent": false,"showLineNumbers": false,"hScrollBarAlwaysVisible": false,"vScrollBarAlwaysVisible": false,"highlightGutterLine": false,"animatedScroll": false,"showPrintMargin": false,"printMargin": false,"fadeFoldWidgets": false,"showFoldWidgets": false,"displayIndentGuides": false,"highlightIndentGuides": false,"showGutter": false,"fontSize": "14px","useTextareaForIME": true,"useSoftTabs": false,"scrollSpeed": 2,"wrap": "off","indentedSoftWrap": false,"foldStyle": "markbegin","enableMultiselect": true,"enableBlockSelect": true})
+    editor.setOptions({"selectionStyle": "line","enableAutoIndent": false,"showLineNumbers": false,"hScrollBarAlwaysVisible": false,"vScrollBarAlwaysVisible": false,"highlightGutterLine": false,"animatedScroll": false,"showPrintMargin": false,"printMargin": false,"fadeFoldWidgets": false,"showFoldWidgets": false,"displayIndentGuides": false,"highlightIndentGuides": false,"showGutter": false,"fontSize": "14px","useTextareaForIME": true,"useSoftTabs": false,"scrollSpeed": 2,"wrap": "off","indentedSoftWrap": false,"foldStyle": "markbegin","enableMultiselect": true,"enableBlockSelect": true})}catch{}
     document.addEventListener("keyup", formatList);
 </script>
 </body>
