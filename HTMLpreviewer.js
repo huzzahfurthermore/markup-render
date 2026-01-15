@@ -30,11 +30,11 @@ function formatList() {
       } else if (codeTime == true) { code.push(item);
 
       } else if (item.match(/#gridmail (.+?)\b/) || item.match(/#link (.+?)( |$)/) || item.match(/#topiclink \d+ (.+?)#endtopiclink/) || item.match(/#anchorlink .+? (.+?)#endanchorlink/) || item.match(/#color (.+?) (.+?)#endcolor\b/)) {
-          try { regexMatch = item.match(/#gridmail (.+?)\b/);regexMatch = regexMatch[1]; regexMatch += "@nlm.wc";regexMatch = "<bright>"+regexMatch+'</bright>';item = item.replace(/#gridmail (.+?)\b/,regexMatch); } catch {}
-          try { regexMatch=item.match(/#link (.+?)($| )/g);i=0;while (i<regexMatch.length) {regexHolder=regexMatch[i].match(/#link (.+?)($| )/);link=regexHolder[1];finalElem=`<a href="/public/${link}">`+link+`</a>`;item=item.replace("#link "+link,finalElem);i++;} } catch {}
-          try { regexMatch=item.match(/#topiclink \d+ (.+?)#endtopiclink/g);i=0;while (i<regexMatch.length) {regexHolder=regexMatch[i].match(/#topiclink (\d+) (.+?)#endtopiclink/);link=regexHolder[2];finalElem=`<a href="">`+link+`</a>`;item=item.replace("#topiclink "+regexHolder[1]+" "+link+"#endtopiclink",finalElem);i++;} } catch {}
-          try { regexMatch=item.match(/#anchorlink .+? (.+?)#endanchorlink/g);i=0;while (i<regexMatch.length) {regexHolder=regexMatch[i].match(/#anchorlink (.+?) (.+?)#endanchorlink/);link=regexHolder[2];finalElem=`<a href="/public/${regexHolder[1]}">`+link+`</a>`;item=item.replace("#anchorlink "+regexHolder[1]+" "+link+"#endanchorlink",finalElem);i++;}} catch {}
-          try {regexMatch=item.match(/#color (.+?) (.+?)#endcolor\b/g);i=0;while (i<regexMatch.length) {regexHolder=regexMatch[i].match(/#color (.+?) (.+?)#endcolor\b/);color=regexHolder[1];message=regexHolder[2];finalElem=`<${color}>`+message+`</${color}>`;item=item.replace("#color "+color+" "+message+"#endcolor",finalElem);i++;}} catch {}
+          try { regexMatch = item.match(/#gridmail (.+?)\b/);regexMatch = regexMatch[1]; regexMatch += "@nlm.wc";regexMatch = `<bright>${regexMatch}</bright>`;item = item.replace(/#gridmail (.+?)\b/,regexMatch); } catch {}
+          try { regexMatch=item.match(/#link (.+?)($| )/g);i=0;while (i<regexMatch.length) {regexHolder=regexMatch[i].match(/#link (.+?)($| )/);link=regexHolder[1];finalElem=`<a href="/public/${link}">${link}</a>`;item=item.replace("#link "+link,finalElem);i++;} } catch {}
+          try { regexMatch=item.match(/#topiclink \d+ (.+?)#endtopiclink/g);i=0;while (i<regexMatch.length) {regexHolder=regexMatch[i].match(/#topiclink (\d+) (.+?)#endtopiclink/);link=regexHolder[2];finalElem=`<a href="">${link}</a>`;item=item.replace(`#topiclink ${regexHolder[1]} ${link}#endtopiclink`,finalElem);i++;} } catch {} // Needs Variables
+          try { regexMatch=item.match(/#anchorlink .+? (.+?)#endanchorlink/g);i=0;while (i<regexMatch.length) {regexHolder=regexMatch[i].match(/#anchorlink (.+?) (.+?)#endanchorlink/);link=regexHolder[2];finalElem=`<a href="/public/${regexHolder[1]}">${link}</a>`;item=item.replace(`#anchorlink ${regexHolder[1]} ${link}#endanchorlink`,finalElem);i++;}} catch {}
+          try {regexMatch=item.match(/#color (.+?) (.+?)#endcolor\b/g);i=0;while (i<regexMatch.length) {regexHolder=regexMatch[i].match(/#color (.+?) (.+?)#endcolor\b/);color=regexHolder[1];message=regexHolder[2];finalElem=`<${color}>${message}</${color}>`;item=item.replace("#color "+color+" "+message+"#endcolor",finalElem);i++;}} catch {}
           res.push(`<p>${item}</p>`);
 
       } else if (item.startsWith("#command")) { command=[];commandTime = true;
@@ -74,19 +74,19 @@ function formatList() {
       } else if (item.startsWith("#endimage")) { imageTime = false;res.push(`<p>Image: <a href='${image[1].trim()}'>${image[1].trim()}</a>\n[OOC: You may access this image and treat it as if you saw it in character.]</p>`)
       } else if (imageTime == true) { image.push(item);
 
-      } else if (item.startsWith("#ad")) {res.push(`<div><blockquote><p style="margin:0px;text-align:center">Cordoba Mallplex: Shop Till You Drop!</p></blockquote></div>`);adTime=true;
+      } else if (item.startsWith("#ad")) {res.push(`<div><blockquote><p style="margin:0px;text-align:center">Cordoba Mallplex: Shop Till You Drop!</p></blockquote></div>`);adTime=true; // Needs Variables
       } else if (item.startsWith("#endad")) {adTime=false;
       } else if (adTime==true) {
         
-      } else if (item.startsWith("#stock")) {res.push(`<div><blockquote><p style="margin:0px;text-align:center">Corpshare price for NLM: 123.456789c</p></blockquote></div>`);stockTime=true;
+      } else if (item.startsWith("#stock")) {res.push(`<div><blockquote><p style="margin:0px;text-align:center">Corpshare price for NLM: 123.456789c</p></blockquote></div>`);stockTime=true; // Needs Variables
       } else if (item.startsWith("#endstock")) {stockTime=false;
       } else if (stockTime==true) {
 
-      } else if (item.startsWith("#network-device")){networkTime=true;res.push('<p>[Network Device Offline]</p>')
+      } else if (item.startsWith("#network-device")){networkTime=true;res.push('<p>[Network Device Offline]</p>') // Needs Variables
       } else if (item.startsWith("#endnetwork-device")){networkTime=false;
       } else if (networkTime==true) {
         
-      } else if (item.startsWith("#theme")){themeTime=true;
+      } else if (item.startsWith("#theme")){themeTime=true; // Needs Variables
       } else if (item.startsWith("#endtheme")){themeTime=false;
       } else if (themeTime==true) {
 
@@ -94,8 +94,8 @@ function formatList() {
       } else if (item.startsWith("#endascii")) { asciiTime = false; art = ascii.slice(1); art=art.join("\n"); res.push(`<div title="${ascii[0]}" style="white-space:break-spaces">${art}</div>`);
       } else if (asciiTime == true) { ascii.push(item);
       
-      } else if (item.startsWith("#weather")) { 
-res.push("<div title='Cloudy' style='white-space:break-spaces'>          .--.            .--.    \n       .-(    ).       .-(    ).  \n      (___.__)__)     (___.__)__) \n   .-(          ). .-(          ). \n  (___.__)__)(__)(___.__)__)(___.)\n\n                Cloudy</div>");
+      } else if (item.startsWith("#weather")) { // Needs Variables
+        res.push("<div title='Cloudy' style='white-space:break-spaces'>          .--.            .--.    \n       .-(    ).       .-(    ).  \n      (___.__)__)     (___.__)__) \n   .-(          ). .-(          ). \n  (___.__)__)(__)(___.__)__)(___.)\n\n                Cloudy</div>");
       } else if (item.startsWith("#endweather")) { 
 
       } else if (item.startsWith("#text")) { text = []; textTime = true;
@@ -145,7 +145,7 @@ res.push("<div title='Cloudy' style='white-space:break-spaces'>          .--.   
         finalBox=`<div class="con" style="gap:${spacing}px"><div class="box1 bg" style="padding:${padding}px;width:${wrap}px">${box1}</div><div class="box2 bg" style="padding:${padding}px;width:${wrap}px">${box2}</div><div class="box3 bg" style="padding:${padding}px;width:${wrap}px">${box3}</div></div>`;res.push(finalBox);
       } else if (threeboxTime == true) { threebox.push(item.trim());
       
-      } else if (item.startsWith("#node-acl")){ res.push('<p>ACL: </p>')
+      } else if (item.startsWith("#node-acl")){ res.push('<p>ACL: </p>') // Needs Variables
       } else if (item.startsWith("#endnode-acl")){
       
       } else if (item!=""&&item!=" "&&item!="&nbsp;"){ res.push(`<p>${item}</p>`); 
