@@ -1,7 +1,7 @@
 textWidth=7.8;
-function formatList() {
+function formatList(pushVal="") {
   res = [];
-  try {value = editor.getValue();}
+  try {if(pushVal!=""&&typeof pushVal!="object"){value=pushVal;}else{value = editor.getValue();}}
   catch(err) {value = document.getElementById("input").value;}
   let arr = value.split(/\r?\n/);
   table = []; tableTime = false;
