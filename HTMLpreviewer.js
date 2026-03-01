@@ -25,8 +25,8 @@ function formatList(pushVal="") {
       } else if (!codeTime&&(item.startsWith("#endhidden")||item.startsWith("#endnon-ascii"))) { hideTime = false;
 
       } else if (item.startsWith("#code")) { code=[];codeTime = true;
-      } else if (item.startsWith("#endcode")) { codeTime = false;codeon="<pre>"
-      for (i in code) {if(i==0){codeon+=code[i]+" ";}else{codeon+="\n"+code[i]+" "}}res.push(codeon+"</pre>")
+      } else if (item.startsWith("#endcode")) { codeTime = false;codeon="<div><pre>"
+      for (i in code) {if(i==0){codeon+=code[i]+" ";}else{codeon+="\n"+code[i]+" "}}res.push(codeon+"</pre></div>")
       } else if (codeTime == true) { code.push(item);
 
       } else if (item.match(/#gridmail (.+?)\b/) || item.match(/#link (.+?)( |$)/) || item.match(/#topiclink \d+ (.+?)#endtopiclink/) || item.match(/#anchorlink .+? (.+?)#endanchorlink/) || item.match(/#color (.+?) (.+?)#endcolor\b/)) {
@@ -100,7 +100,7 @@ function formatList(pushVal="") {
 
       } else if (item.startsWith("#text")) { text = []; textTime = true;
       } else if (item.startsWith("#endtext")) { textTime = false; wrap=Number(text[0]);wrap*=textWidth;textHolder=`<div class="text" style="width:${wrap}px"><p>`;
-        for (i in text) { if (i==0) {} else if (text[i]==""){textHolder+="<nb>&nbsp;</nb>";} else if (i==1) {textHolder+=text[i].trim();}else{textHolder+="\n"+text[i].trim();}}res.push(textHolder+"</p></div>");
+        for (i in text) { if (i==0) {} else if (text[i]==""){textHolder+="<nb></nb>";} else if (i==1) {textHolder+=text[i].trim();}else{textHolder+="\n"+text[i].trim();}}res.push(textHolder+"</p></div>");
       } else if (textTime == true) { text.push(item.trim()) 
       //https://honorless.net/progressbar.htm
       } else if (item.startsWith("#progress-bar")) { progress = []; progressTime = true;
@@ -149,7 +149,7 @@ function formatList(pushVal="") {
       } else if (item.startsWith("#endnode-acl")){
       
       } else if (item!=""&&item!=" "&&item!="&nbsp;"){ res.push(`<p>${item}</p>`); 
-      } else { res.push("<nb>&nbsp;</nb>")}
+      } else { res.push("<nb></nb>")}
   });
 
   const textarea = document.getElementById("output");
