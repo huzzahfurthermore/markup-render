@@ -95,7 +95,7 @@ h1 {
 	grid-template-columns: auto auto !important;
 	margin: 5px auto !important;
 }
-.conTwo > div {max-width: 345px !important;}
+#output .conTwo div {max-width: 345px !important;}
 div.box1 {grid-area: box1 !important;}
 div.box2 {grid-area: box2 !important;}
 div.box3 {grid-area: box3 !important;}
