@@ -10,12 +10,54 @@
 <div id="editor"></div>
 </div>
 </div>
-<script src="https://cdn.jsdelivr.net/combine/npm/ace-builds@1.43.5,npm/ace-builds@1.43.5/src-min-noconflict/ext-searchbox.js,npm/ace-builds@1.43.5/src-min-noconflict/theme-twilight.js"></script>
+<script src="https://cdn.jsdelivr.net/combine/npm/ace-builds@1.43.6/src-min-noconflict/ext-language_tools.min.js,npm/ace-builds@1.43.6/src-min-noconflict/ext-searchbox.min.js,npm/ace-builds@1.43.6/src-min-noconflict/ext-options.min.js,npm/ace-builds@1.43.6,npm/ace-builds@1.44.0/src-min-noconflict/theme-twilight.min.js"></script><script src="ace_grammar.js"></script>
 <script>
   try{
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/twilight");
-    editor.setOptions({"selectionStyle": "line","enableAutoIndent": false,"showLineNumbers": false,"hScrollBarAlwaysVisible": false,"vScrollBarAlwaysVisible": false,"highlightGutterLine": false,"animatedScroll": false,"showPrintMargin": false,"printMargin": false,"fadeFoldWidgets": false,"showFoldWidgets": false,"displayIndentGuides": false,"highlightIndentGuides": false,"showGutter": false,"fontSize": "14px","useTextareaForIME": true,"useSoftTabs": false,"scrollSpeed": 2,"wrap": "off","indentedSoftWrap": false,"foldStyle": "markbegin","enableMultiselect": true,"enableBlockSelect": true})}catch{}
+	  editor.setOptions({"selectionStyle": "line","enableAutoIndent": false,"showLineNumbers": false,"hScrollBarAlwaysVisible": false,"vScrollBarAlwaysVisible": false,"highlightGutterLine": false,"animatedScroll": false,"showPrintMargin": false,"printMargin": false,"fadeFoldWidgets": false,"showFoldWidgets": false,"displayIndentGuides": false,"highlightIndentGuides": false,"showGutter": false,"fontSize": "14px","useTextareaForIME": true,"useSoftTabs": false,"scrollSpeed": 2,"wrap": "off","indentedSoftWrap": false,"foldStyle": "markbegin","enableMultiselect": true,"enableBlockSelect": true,"enableBasicAutocompletion": true,"enableLiveAutocompletion": true,"liveAutocompletionThreshold":3})
+  	editor.completers = [{getCompletions: function(editor, session, pos, prefix, callback) {
+	    var completions = [
+	    {caption:"#ascii",snippet:"ascii\n${1:Alt}\n${2:Text}\n#endascii\n",meta:"snippet",type:"snippet"}, 
+	    {caption:"#nasc",snippet:"non-ascii\n${1:Text}\n#endnon-ascii\n",meta:"snippet",type:"snippet"}, 
+	    {caption:"#unord", value:"#unordered-list\n${1:Color}\n${2:Text}\n#endunordered-list\n",meta:"snippet", type:"snippet"}, 
+	    {caption:"#order", value:"#ordered-list\n${1:Color}\n${2:Text}\n#endordered-list\n",meta:"snippet", type:"snippet"}, 
+        {caption:"#quote",snippet:"quote\n${1:Quote}\n${2:Author}\n${3:Year}\n#endquote\n",meta:"snippet",type:"snippet"},
+        {caption:"#table",snippet:"table\n${1:header}\n${2:content}\n#endtable\n",meta:"snippet",type:"snippet"},
+        {caption:"#advert",snippet:"ad\n${1:ID}\n#endad\n",meta:"snippet",type:"snippet"},
+        {caption:"#two-box",snippet:"two-box\n${1:Padding}\n${2:Wrap}\n${3:Spacing}\n${4:Text}\n${5:Text}\n#endtwo-box\n",meta:"snippet",type:"snippet"},
+        {caption:"#three-box",snippet:"three-box\n${1:Padding}\n${2:Wrap}\n${3:Spacing}\n${4:Text}\n${5:Text}\n${6:Text}\n#endthree-box\n",meta:"snippet",type:"snippet"},
+        {caption:"#hidden",snippet:"hidden\n${1:Text}\n#endhidden\n",meta:"snippet",type:"snippet"},
+        {caption:"#text",snippet:"text\n${1:Wrap}\n${2:Text}\n#endtext\n",meta:"snippet",type:"snippet"},
+        {caption:"#rotating-message",snippet:"rotating-message\n${1:Color}\n${2:Text}\n#endrotating-message\n",meta:"snippet",type:"snippet"},
+        {caption:"#blinking-text",snippet:"blinking-text\n${1:Color}\n${2:Text}\n#endblinking-text\n",meta:"snippet",type:"snippet"},
+        {caption:"#command",snippet:"command\n${1:Command}\n${2:Desc}\n#endcommand\n",meta:"snippet",type:"snippet"},
+        {caption:"#header",snippet:"header\n${1:Color}\n${2:Text}\n#endheader\n",meta:"snippet",type:"snippet"},
+        {caption:"#weather",snippet:"weather\n#endweather\n",meta:"snippet",type:"snippet"},
+        {caption:"#code",snippet:"code\n${1:Text}\n#endcode\n",meta:"snippet",type:"snippet"},
+        {caption:"#copyright",snippet:"copyright\n${1:Company}\n${2:Year}\n#endcopyright\n",meta:"snippet",type:"snippet"},
+        {caption:"#network-device",snippet:"network-device\n${1:ID}\n#endnetwork-device\n",meta:"snippet",type:"snippet"},
+        {caption:"#theme",snippet:"theme\n${1:Name}\n#endtheme\n",meta:"snippet",type:"snippet"},
+        {caption:"#image",snippet:"image\n${1:Alt}\n${2:Link#endimage}\n",meta:"snippet",type:"snippet"},
+        {caption:"#stock-ticker",snippet:"stock-ticker\n${1:Corp}\n#endstock-ticker\n",meta:"snippet",type:"snippet"},
+        {caption:"#progress-bar",snippet:"progress-bar\n${1:cColor}\n${2:uColor}\n${3:sColor}\n${4:length}\n${5:progress}\n#endprogress-bar",meta:"snippet",type:"snippet"},
+        {caption:"#node-acl",snippet:"node-acl\n#endnode-acl\n",meta:"snippet",type:"snippet"},
+
+        {caption:"#gm",snippet:"gridmail ${1:Addr}",meta:"snippet",type:"snippet"},
+        {caption:"#link",snippet:"link ${1:Node}",meta:"snippet",type:"snippet"},
+        {caption:"#anchor",snippet:"anchorlink ${1:Node} ${2:Text}#endanchorlink",meta:"snippet",type:"snippet"},
+        {caption:"#topic",snippet:"topiclink ${1:ID} ${2:Text}#endtopiclink",meta:"snippet",type:"snippet"},
+        {caption:"#color",snippet:"color ${1:Color} ${2:Text}#endcolor",meta:"snippet",type:"snippet"},
+	    ]; callback(null, completions);},
+	getDocTooltip:function(item) {if (!item.docHTML) {item.docHTML = ["<b>", item.caption, "</b>",].join("");}}}];
+
+	var xml_grammar = {"RegExpID": "RE::",
+		"Style": {"opening":"heading","color":"variable.support","closing":"string"},
+		"Lex": {"opening":"RE::/#[a-z][a-z-$]*/","closing": "RE::/#end[a-z][a-z-$]*/","color":{"autocomplete":true,"tokens":[ "red", "blue", "magenta", "green", "yellow", "cyan", "white" ]}},
+		"Syntax": {"dot_property": {"sequence":[".", "property"]},"node": "closing | opening | color "},
+		"Parser": [ ["node"] ]};
+	var xml_mode = AceGrammar.getMode( xml_grammar ); editor.getSession().setMode(xml_mode);
+  }catch{}
     document.addEventListener("keyup", formatList);
 </script>
 </body>
